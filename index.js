@@ -8,19 +8,21 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-
-  // test event
   socket.on('test', function(msg){
-    console.log('val: ' + msg);
+    console.log('test: ' + msg);
   });
 
-  // emit the increment for rotation
-  io.emit("rot-y", 0.1);
-
+  socket.on('motion', function(msg){
+      io.emit('motion', msg);
+      console.log("Motion: " + JSON.stringify(msg))
+      console.log("Motion event sent");
+  });
   console.log('a user connected');
+
 });
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
+
 
