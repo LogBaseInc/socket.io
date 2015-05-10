@@ -48,6 +48,11 @@
         #messages li:nth-child(odd) {
             background: #eee;
         }
+        h1 {
+            font-family:verdana;
+            font-size:300%;
+
+        }
     </style>
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -59,7 +64,11 @@
             });
             socket.on('car_state', function (msg) {
                 console.log("message received" + JSON.stringify(msg));
-                $('#state_label')[0].innerHTML = "<h1>State of the car: " + msg["car_state"]+ "</h1>";
+                if(msg["car_state"]=="Crash"){
+                    $('#state_label')[0].innerHTML = "<h1 style='color: red'>Detected a Car Accident. Calling the driver.</h1>";
+                }else{
+                    $('#state_label')[0].innerHTML = "<h1>State of the car: " + msg["car_state"]+ "</h1>";
+                }
             });
         });
     </script>
