@@ -78,9 +78,12 @@ window.onload = function () {
     });
     socket.on("queue-2", function (msg) {
        msg = toJSON(msg);
+	console.log(msg);
         $("#customer_stats")[0].innerText = "Customer ETA(mins): " + msg["customer_eta"];
         $("#ola_stats")[0].innerText = "OLA CAB ETA(mins): " + msg["ola_eta"];
     });
     socket.on("queue-3", function (msg) {
+       msg = toJSON(msg);
+        $("#booking_status")[0].innerText = "Status: " + msg["status"];
     });
 }
